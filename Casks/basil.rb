@@ -4,8 +4,8 @@ cask "basil" do
 
   url "https://github.com/stratten/Basil_OS/releases/download/v#{version}/Basil.dmg"
   name "Basil"
-  desc "Local-first AI assistant for your Mac"
-  homepage "https://basil.ac"
+  desc "Local-first AI assistant with agents, transcription, and meeting notes"
+  homepage "https://basil.ac/"
 
   livecheck do
     url :url
@@ -14,7 +14,7 @@ cask "basil" do
 
   auto_updates true
   depends_on arch: :arm64
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "Basil.app"
 
