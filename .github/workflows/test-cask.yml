@@ -1,0 +1,40 @@
+name: Test cask
+
+on:
+  push:
+    paths:
+      - "Casks/**"
+      - ".github/workflows/test-cask.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Tap this repository
+        run: brew tap stratten/tap "$GITHUB_WORKSPACE"
+
+      - name: Style check
+        run: brew style --cask stratten/tap/basil
+
+      - name: Audit
+        run: brew audit --cask --online stratten/tap/basil
+
+      - name: Install
+        run: brew install --cask stratten/tap/basil
+
+      - name: Check the installed app
+        run: |
+          app="/Applications/Basil.app"
+          test -d "$app"
+          codesign --verify --deep --strict "$app"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$app/Contents/Info.plist"
+          spctl --assess --type execute -vv "$app"
+
+      - name: Uninstall
+        run: brew uninstall --cask stratten/tap/basil
