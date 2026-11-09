@@ -1,6 +1,6 @@
 cask "basil" do
-  version "1.0.1"
-  sha256 "58f4f6266f73b8bd27f486cca1b4ff5ee1b70d6c04f64f218abfb5c0efddaa1d"
+  version "1.0.2"
+  sha256 "624daf2874fc8cf319392ad22257f3c2cab57c82459cc06559edb6a960aa4920"
 
   url "https://github.com/stratten/Basil_OS/releases/download/v#{version}/Basil.dmg"
   name "Basil"
